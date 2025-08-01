@@ -1,7 +1,6 @@
 package com.sp.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sp.entity.Student;
 import com.sp.repository.StudentRepository;
 import com.sp.service.StudentService;
@@ -28,14 +26,13 @@ public class StudentController {
 
 	@Autowired
 	private StudentRepository studentRepo;
-	//display rest api
+	
 	@GetMapping("/record")
 	public List<Student> studentRecordDisplay() {
 		List<Student> list = service.displayStudent();
 		return list;
 	}
 	
-	//delete rest api
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
@@ -47,13 +44,11 @@ public class StudentController {
 		}
 	}
 	
-	//update rest api
 	@GetMapping("/{id}")
 	public ResponseEntity<Student> getById(@PathVariable Long id) {
 		return studentRepo.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 	
-	//update same as
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody Student student) {
@@ -65,7 +60,6 @@ public class StudentController {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 	
-	//register rest api
 	@PostMapping
 	public Student createStudent(@RequestBody Student student) {
 	    return studentRepo.save(student);
